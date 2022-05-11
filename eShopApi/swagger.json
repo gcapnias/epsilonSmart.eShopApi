@@ -1,0 +1,507 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EpsilonSmart Eshop API",
+    "description": "This is the EspilonSmart API descriptor. The particular definition of the API provides API endpoints related to e-shop operations. </br>\r\nAll the following actions require Authorization token. Http request should contain a header having key: 'Authorization' and value: 'Bearer {Jwt Token value}'. \r\nIf the request lacks Authorization header or the token is invalid, each action responds with status 401 Unauthorized.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Eshop/GetItems": {
+      "get": {
+        "tags": [
+          "miEshopAPI"
+        ],
+        "parameters": [
+          {
+            "name": "RevisionNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EshopItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EshopItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EshopItem"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Eshop/InsertDocuments": {
+      "post": {
+        "tags": [
+          "miEshopAPI"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EshopSale"
+                },
+                "nullable": true
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EshopSale"
+                },
+                "nullable": true
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EshopSale"
+                },
+                "nullable": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EshopItem": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "ScanCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Domain": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "NormalVATPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "ReducedVATPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "MeasurementUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "MeasurementUnitShortcut": {
+            "type": "string",
+            "nullable": true
+          },
+          "Category": {
+            "type": "string",
+            "nullable": true
+          },
+          "RetailCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "RetailCategoryInnerCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "WholesalePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "RetailPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "Remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefinedText01": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefinedText02": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefinedText03": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefinedText04": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefinedText05": {
+            "type": "string",
+            "nullable": true
+          },
+          "RevisionNumber": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "EshopVatStatus": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EshopPaymentMethod": {
+        "enum": [
+          0,
+          1,
+          2,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EshopItemLine": {
+        "type": "object",
+        "properties": {
+          "ItemID": {
+            "type": "string",
+            "nullable": true
+          },
+          "ItemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ScanCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ItemPrintDescr": {
+            "type": "string",
+            "nullable": true
+          },
+          "VATPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "Qty": {
+            "type": "number",
+            "format": "double"
+          },
+          "Price": {
+            "type": "number",
+            "format": "double"
+          },
+          "IsGift": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "LineDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "NetVal": {
+            "type": "number",
+            "format": "double"
+          },
+          "VATVal": {
+            "type": "number",
+            "format": "double"
+          },
+          "TotalVal": {
+            "type": "number",
+            "format": "double"
+          },
+          "Justification": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EshopSale": {
+        "type": "object",
+        "properties": {
+          "DocDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IsRetail": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "VatStatus": {
+            "$ref": "#/components/schemas/EshopVatStatus"
+          },
+          "RefDocCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "DocNum": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "PaymentMethod": {
+            "$ref": "#/components/schemas/EshopPaymentMethod"
+          },
+          "PaymentCreditCardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "PaymentBankAccName": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustName": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustTIN": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustStreet": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustStreetΝο": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustPostalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustPhone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "ExtraCharges": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "Justification": {
+            "type": "string",
+            "nullable": true
+          },
+          "Comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefText01": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefText02": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefText03": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefText04": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDefText05": {
+            "type": "string",
+            "nullable": true
+          },
+          "Lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EshopItemLine"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "jwt_auth": {
+        "type": "http",
+        "description": "Specify the authorization token.",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "jwt_auth": [ ]
+    }
+  ]
+}
